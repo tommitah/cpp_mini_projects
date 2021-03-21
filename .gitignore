@@ -1,0 +1,5 @@
+.ycm_extra_conf.py
+testcpp/.vscode/tasks.json
+testcpp/.vscode/launch.json
+.vscode/launch.json
+.vscode/tasks.json

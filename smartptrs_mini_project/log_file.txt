@@ -1,0 +1,16 @@
+<Sun Mar 21 23:44:04 2021> ownership changed  RC: 0 <0x564586a55eb0>
+<Sun Mar 21 23:44:04 2021> operator* RC: 1 <0x564586a55eb0>
+<Sun Mar 21 23:44:04 2021> operator-> RC: 1 <0x564586a55eb0>
+<Sun Mar 21 23:44:04 2021> copied RC: 2 <0x564586a55eb0>
+<Sun Mar 21 23:44:04 2021> ownership changed  RC: 0 <0x564586a56640>
+<Sun Mar 21 23:44:04 2021> assigned RC: 2 <0x564586a55eb0>
+<Sun Mar 21 23:44:04 2021> object destroyed RC: 2 <0x564586a55eb0>
+<Sun Mar 21 23:44:04 2021> object destroyed RC: 2 <0x564586a55eb0>
+<Mon Mar 22 00:08:41 2021> ownership changed  RC: 0 <0x555ec7b3feb0>
+<Mon Mar 22 00:08:41 2021> operator* RC: 1 <0x555ec7b3feb0>
+<Mon Mar 22 00:08:41 2021> operator-> RC: 1 <0x555ec7b3feb0>
+<Mon Mar 22 00:08:41 2021> copied RC: 2 <0x555ec7b3feb0>
+<Mon Mar 22 00:08:41 2021> ownership changed  RC: 0 <0x555ec7b40640>
+<Mon Mar 22 00:08:41 2021> assigned RC: 2 <0x555ec7b3feb0>
+<Mon Mar 22 00:08:41 2021> object destroyed RC: 2 <0x555ec7b3feb0>
+<Mon Mar 22 00:08:41 2021> object destroyed RC: 2 <0x555ec7b3feb0>
