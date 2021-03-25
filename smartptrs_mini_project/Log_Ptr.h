@@ -2,7 +2,6 @@
 #include <string>
 #include <chrono>
 #include <sstream>
-#include <assert.h>
 
 /* @param - time_point: local time.
  * @returns - string: time in string.
@@ -37,7 +36,7 @@ auto memory_address_format(T ptr) {
   return address;
 }
 
-/** Should the Log_Ptr be an interface? Or should the
+/* Should the Log_Ptr be an interface? Or should the
  * RC at least be stored on a different layer?
  * I need an adult....
  */
@@ -59,7 +58,8 @@ class Log_Ptr {
             + " object destroyed RC: " + std::to_string(get_RC()) + 
             " <" + memory_address_format(_i) + ">"
           );
-      delete _i; 
+      release();
+      if(get_RC() == 0) delete _i; 
     }
     
     // copy constructor
@@ -77,7 +77,7 @@ class Log_Ptr {
     Log_Ptr& operator=(const Log_Ptr &og) { 
       _i = og._i; 
       m_ref_count = og.m_ref_count;
-      grab(); 
+      grab();
       log_to_file("<" + date_time_format(std::chrono::system_clock::now()) + ">"
             + " assigned RC: " + std::to_string(get_RC()) + 
             " <" + memory_address_format(_i) + ">"
@@ -108,14 +108,19 @@ class Log_Ptr {
 
     auto grab() { m_ref_count++; }
     auto release() const {
-      assert(m_ref_count > 0);
-      --m_ref_count;
-
+      if(m_ref_count > 0) { --m_ref_count; }
+      // if ref_count == 0 we delete the smart pointer.
       if(m_ref_count == 0) { delete (Log_Ptr*)this; }
     }
 };
 
+class RC {
+  public:
+    static int rc_ref_count;
 
+  private:
+    RC() {}
+};
 
 
 
