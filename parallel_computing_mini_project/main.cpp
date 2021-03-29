@@ -24,26 +24,31 @@ inline double distance(int c0, int r0, int c1, int r1) {
   return sqrt((r0 - r1) * (r0 - r1) + (c0 - c1) * (c0 - c1));
 }
 
-auto calculate_influence_map() {
-  for(int i = 0; i < (int)COLS; i++) {
-    for(int j = 0; i < (int)ROWS; j++) {
-      // foreach for map units
-      for(auto& cols: map) {
-        for(auto& rows: cols) {
-          if(rows != 0)
-            influence_map[i][j] += 
-              influence_in_tile(rows, distance(cols, rows, i, j));
-        }
-      }
-    }
-  }
-
-  return;
-}
-
 auto influence_in_tile(double unit_strength, double distance) {
   return unit_strength / (1 + distance);
 }
+
+auto calculate_influence_map() {
+  for(int i = 0; i < COLS; i++) {
+    for(int j = 0; i < ROWS; j++) {
+      // foreach for map units
+      for(auto& cols: map) {
+        int k = 0;
+        for(auto& rows: cols) {
+          int h = 0;
+          if(rows != 0) {
+            influence_map[i][j] += influence_in_tile(rows, distance(k, h, i, j));
+            std::cout << influence_map[i][j];
+          }
+          h++;
+        }
+        std::cout << std::endl;
+        k++;
+      }
+    }
+  }
+}
+
 
 /**
  * */
@@ -86,6 +91,7 @@ int main() {
    * */
   populate_map();
   //log_units();
+  calculate_influence_map();
 
   return 0;
 }
