@@ -1,0 +1,5 @@
+Running the algorithm with a sample of 16x16 map took 0.002 seconds.
+
+Running the algorithm with a sample of 300x300 map took 96.5 seconds.
+
+
