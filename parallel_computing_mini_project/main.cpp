@@ -4,6 +4,10 @@
 #include <iostream>
 #include <chrono>
 #include <string>
+#include <vector>
+#include <array>
+#include <algorithm>
+#include <execution>
 
 constexpr auto COLS = 300;
 constexpr auto ROWS = 300;
@@ -18,6 +22,8 @@ double map[COLS][ROWS];
  * Influence map.
  * */
 double influence_map[COLS][ROWS];
+
+std::vector<std::array<double, 300>> inf_map_rows = {};
 
 /**
  * Calculates distance between (c0, r0) and (c1, r1).
@@ -45,6 +51,28 @@ auto calculate_influence_map() {
       }
     }
   }
+  auto end = std::chrono::steady_clock::now();
+  time_elapsed(start, end);
+}
+
+auto inf_in_tile = [](auto arr) { 
+  for(int i = 0; i < COLS; i++) {
+    for(int j = 0; j < ROWS; j++) {
+      arr[i] = 0;
+      for(int x = 0; x < COLS; x++) {
+        for(int y = 0; y < ROWS; y++) {
+          arr[i] += (map[x][y] / (1 + distance(i, j, x, y)));
+        }
+      }
+    }
+  }
+};
+
+auto calc_inf_for_each() {
+  auto start = std::chrono::steady_clock::now();
+
+  std::for_each(std::execution::par_unseq, inf_map_rows.begin(), inf_map_rows.end(), inf_in_tile);
+
   auto end = std::chrono::steady_clock::now();
   time_elapsed(start, end);
 }
@@ -87,6 +115,18 @@ auto log_influence() {
   }
 }
 
+// Copy a row to std::array to be stored int the vector.
+auto set_map_vector() {
+  for(int i = 0; i < COLS; i++) {
+    std::array<double, 300> arr;
+    for(int j = 0; j < ROWS; j++) 
+      arr[i] = map[i][j];
+    inf_map_rows.push_back(arr);
+  }
+  std::cout << "Vector size: " << inf_map_rows.size();
+} 
+
+
 int main() {
   /**
    * TODO
@@ -99,7 +139,9 @@ int main() {
    * */
   populate_map();
   //log_units();
-  calculate_influence_map();
+  set_map_vector();
+  calc_inf_for_each();
+  //calculate_influence_map();
   //log_influence();
 
   return 0;
