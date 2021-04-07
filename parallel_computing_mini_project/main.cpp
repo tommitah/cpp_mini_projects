@@ -8,6 +8,7 @@
 #include <array>
 #include <algorithm>
 #include <execution>
+#include <future>
 
 constexpr auto COLS = 300;
 constexpr auto ROWS = 300;
@@ -55,7 +56,7 @@ auto calculate_influence_map() {
   time_elapsed(start, end);
 }
 
-auto inf_in_tile = [](auto arr) { 
+auto inf_in_row = [](auto arr) { 
   for(int i = 0; i < COLS; i++) {
     for(int j = 0; j < ROWS; j++) {
       arr[i] = 0;
@@ -68,10 +69,23 @@ auto inf_in_tile = [](auto arr) {
   }
 };
 
+
+//auto calc_inf_async() {
+  //auto start = std::chrono::steady_clock::now();
+
+  //std::future<std::vector<std::array<double, 300>>> inf_map = 
+    //std::async(std::launch::deferred, inf_in_row,
+        //inf_map_rows.begin(), inf_map_rows.end());
+
+  //auto end = std::chrono::steady_clock::now();
+  //time_elapsed(start, end);
+//}
+
 auto calc_inf_for_each() {
   auto start = std::chrono::steady_clock::now();
 
-  std::for_each(std::execution::par_unseq, inf_map_rows.begin(), inf_map_rows.end(), inf_in_tile);
+  std::for_each(std::execution::par_unseq, inf_map_rows.begin(), 
+      inf_map_rows.end(), inf_in_row);
 
   auto end = std::chrono::steady_clock::now();
   time_elapsed(start, end);

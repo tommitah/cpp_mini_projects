@@ -2,4 +2,9 @@ Running the algorithm with a sample of 16x16 map took 0.002 seconds.
 
 Running the algorithm with a sample of 300x300 map took 96.5 seconds.
 
+Vaihe 2:
+Hirveä kasa ongelmia g++ kääntäjän kanssa, lähtien siitä että -std flagit pakotti väärän standardin,
+kuten -std=c++20 pakotti std=c++17 (testattu printf("%ld", __cplusplus);).
+Saatu lopulta kääntymään clangilla, mutta binääri ei ajanut loppuun, 
+eli toteutuksessa vika? Kaikki ytimet oli kyllä käytössä joten policy toimi.
 
