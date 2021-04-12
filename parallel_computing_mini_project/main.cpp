@@ -84,8 +84,18 @@ auto inf_in_row = [](auto arr) {
 auto calc_inf_for_each() {
   auto start = std::chrono::steady_clock::now();
 
-  std::for_each(std::execution::par_unseq, inf_map_rows.begin(), 
-      inf_map_rows.end(), inf_in_row);
+  std::for_each(std::execution::par_unseq, begin(inf_map_rows), 
+      end(inf_map_rows), [](auto arr) { 
+  for(int i = 0; i < COLS; i++) {
+    for(int j = 0; j < ROWS; j++) {
+      arr[i] = 0;
+      for(int x = 0; x < COLS; x++) {
+        for(int y = 0; y < ROWS; y++) {
+          arr[i] += (map[x][y] / (1 + distance(i, j, x, y)));
+        }
+      }
+    }
+  }});
 
   auto end = std::chrono::steady_clock::now();
   time_elapsed(start, end);

@@ -4,8 +4,8 @@ Section 1:
   c. Perinteinen for-silmukka käsittelee itse iteraattoreita, uusi for(each) käsittelee itse arvoja joille iteraattorit olisi osoitettu. Luettavampi tapa tehdä toistorakenne.
   d. final tarkoittaa että ko. virtuaalifunktiota ei voida "ylikirjoittaa" perijäluokasssa, tai että luokasta ei voi muodostaa perijäluokkaa.
      override tarkoittaa että virtuaalifunktio "ylikirjoittaa" eli ottaa ko. perijäluokassa olevan määrittelyn funktiolle evankeliumina, eikä perittyä funktiota.
-  e. =deletellä estetään luokan kopiointi kopiokonstruktorilla.
-  f long long int tarkoittaa 64 bittiä muistia vievää muuttujaa, joka voi säilyttää pos. ja neg. arvoja ja voi säilyttää suurempaa arvoa kuin int.
+  e. =delete deallokoi eli vapauttaa muistiblokin johon ptr osoittaa. 
+  f. long long int tarkoittaa 64 bittiä muistia vievää muuttujaa, joka voi säilyttää pos. ja neg. arvoja ja voi säilyttää suurempaa arvoa kuin int.
   g. hash-taululla tarkoitetaan tietorakennetta, jossa säilytetään "key-value pairs", eli avain-arvo pareja, jossa sisäisesti elementit eivät ole "järjestyksessä".
      Tällaisella hash-taululla on haku-, lisäämis- sekä poistotoiminnallisuus ja niiden aikakompleksisuus on O(1).
   h. std::regex on kirjasto, joka mahdollistaa säännöllisten lausekkeiden käytön, eli hakumallin käytön. Niitä käytetään testaamaan stringien yhdenmukaisuuden testaamiseen.
