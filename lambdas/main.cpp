@@ -1,6 +1,7 @@
 #include "first.h"
 #include "second.h"
 #include "third.h"
+#include <iostream>
 
 
 int main() {
@@ -19,6 +20,14 @@ int main() {
   //lambdas_func_objects();
 
   /* Section 3 */
+	Big_Data a(1024);
+	Big_Data b(1024);
+	a = a;
+	a = b;
+	Big_Data c(a);
+  std::cout << a.get() << std::endl;
+  std::cout << b.get() << std::endl;
+  std::cout << c.get() << std::endl;
   
   return 0;
 }

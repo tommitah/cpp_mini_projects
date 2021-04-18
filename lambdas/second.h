@@ -3,12 +3,12 @@
 #include <vector>
 #include <algorithm>
 
-void print_points(std::vector<int>& hit_points) {
+inline void print_points(std::vector<int>& hit_points) {
   std::cout << std::endl;
   for(auto points : hit_points) std::cout << points << std::endl;
 }
 
-auto operation_separate(int& hit_points) {
+inline auto operation_separate(int& hit_points) {
   hit_points >= 100 ? hit_points -= 100 : hit_points = 0;
 }
 
@@ -18,7 +18,7 @@ auto operation_named_lambda = [](int& n) {
 
 
 
-void lambdas_func_objects() {
+inline void lambdas_func_objects() {
   std::vector<int> enemy_hit_points { 999, 256, 666, 1337, 13131 };
 
   //separate
