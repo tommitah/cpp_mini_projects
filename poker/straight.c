@@ -17,11 +17,9 @@
 #include <stdio.h>
 #include <time.h>
 
-inline int is_straight(int *k);
+extern inline int is_straight(int *k);
 
-
-int main()
-{
+int main() {
   /*
 
     Käydään läpi kaikki viiden kortin permutaatiot, ja lasketaan
@@ -34,41 +32,57 @@ int main()
     Straight        10,200 combinations
 
     Koska 5 korttia voi olla 5 x 4 x 3 x 2 x 1 = 120 järjestyksessä,
-    pitäisi suoria löytyä (10200 + 36 + 4) x 120 = 1228800 kappaletta. 
+    pitäisi suoria löytyä (10200 + 36 + 4) x 120 = 1228800 kappaletta.
 
   */
   int k0, k1, k2, k3, k4; /* Pakan kortit, 0..51*/
-  int k[5]; /* Korttien numeroarvot, 2..14*/
-  int suoria; /* Suorien lkm*/
+  int k[5];               /* Korttien numeroarvot, 2..14*/
+  int suoria;             /* Suorien lkm*/
   clock_t t1, t2;
 
   t1 = clock();
   suoria = 0;
   for (k0 = 0; k0 < 52; ++k0) {
-  for (k1 = 0; k1 < 52; ++k1) { if (k1==k0)continue;
-  for (k2 = 0; k2 < 52; ++k2) { if (k2==k0||k2==k1)continue;
-  for (k3 = 0; k3 < 52; ++k3) { if (k3==k0||k3==k1||k3==k2)continue;
-  for (k4 = 0; k4 < 52; ++k4) { if (k4==k0||k4==k1||k4==k2||k4==k3)continue;
+  for (k1 = 0; k1 < 52; ++k1) { if (k1 == k0) continue;
+  for (k2 = 0; k2 < 52; ++k2) { if (k2 == k0 || k2 == k1) continue;
+  for (k3 = 0; k3 < 52; ++k3) { if (k3 == k0 || k3 == k1 || k3 == k2) continue;
+  for (k4 = 0; k4 < 52; ++k4) { if (k4 == k0 || k4 == k1 || k4 == k2 || k4 == k3) continue;
 
-	    /*
-	      Lasketaan korttien numeroarvot ja
-	      tarkistetaan onko suora.
-	    */
-	    k[0] = (k0 % 13) + 2;
-	    k[1] = (k1 % 13) + 2;
-	    k[2] = (k2 % 13) + 2;
-	    k[3] = (k3 % 13) + 2;
-	    k[4] = (k4 % 13) + 2;
-	    if (is_straight(k))
-	      ++suoria;
-	  }}}}}
+            /*
+              Lasketaan korttien numeroarvot ja
+              tarkistetaan onko suora.
+            */
+            k[0] = (k0 % 13) + 2;
+            k[1] = (k1 % 13) + 2;
+            k[2] = (k2 % 13) + 2;
+            k[3] = (k3 % 13) + 2;
+            k[4] = (k4 % 13) + 2;
+            if (is_straight(k))
+              ++suoria;
+  }}}}}
   t2 = clock();
+  for(int i = 0; i < 5; i++) printf("%d ", k[i]);
+  printf("\n");
   printf("Suoria     : %d kpl (oikea arvo 1228800)\n", suoria);
   printf("Aikaa kului: %.1fs\n", (t2 - t1) / (float)CLOCKS_PER_SEC);
- 
+
   return 0;
 }
 
+void swap(int a, int b) {
+  int temp = a;
+  a = b;
+  b = temp;
+}
+
+void bubble_sort(int array[], int size) {
+  int i, j;
+
+  for (i = 0; i < size - 1; i++)
+    for (j = 0; j < size - i - 1; j++)
+      if (array[j] > array[j + 1])
+        swap(array[j], array[j + 1]);
+}
 
 /*
   Parametrina 5 pelikortin numeroarvoa k, 2..14 (ei välttämättä
@@ -80,9 +94,17 @@ int main()
   Huom! Ässää (arvo 14) voidaan käyttää suorissa myös arvona 1
   (esim. 1,2,3,4,5).
 */
-inline int is_straight(int *k)
-{
+extern inline int is_straight(int *k) {
   // TODO
+  // sort the cards from greatest to smallest. (bubble sort)
+  int counter = 0;
+  bubble_sort(k, 5);
 
-  return 1;
+  // check if the indexes are one greater than the next, no need to check the other way around.
+  for(int i=0; i < 5; i++)
+    if((k[i]-1) == k[i+1])
+      counter++;
+
+  if (counter == 5) return 1;
+  return 0;
 }
