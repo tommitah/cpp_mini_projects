@@ -19,58 +19,6 @@
 
 extern inline int is_straight(int *k);
 
-void swap(int a, int b) {
-  int temp = a;
-  a = b;
-  b = temp;
-}
-
-void bubble_sort(int array[], int size) {
-  int i, j;
-
-  for (i = 0; i < size - 1; i++)
-    for (j = 0; j < size - i - 1; j++)
-      if (array[j] < array[j + 1])
-        swap(array[j], array[j + 1]);
-}
-
-/*
-  Parametrina 5 pelikortin numeroarvoa k, 2..14 (ei välttämättä
-  numerojärjesteyksessä).
-
-  Palauttaa 1, jos numeroarvot voidaan järjestää siten, että
-  ne muodostavat suoran (esim. 4,5,6,7,8).
-
-  Huom! Ässää (arvo 14) voidaan käyttää suorissa myös arvona 1
-  (esim. 1,2,3,4,5).
-*/
-extern inline int is_straight(int *k) {
-  // TODO
-  // sort the cards from smallest to greatest. (bubble sort)
-  int i, j;
-
-  for (i = 0; i < 5 - 1; i++)
-    for (j = 0; j < 5 - i - 1; j++)
-      if (k[j] > k[j + 1]) {
-        int temp = k[j];
-        k[j] = k[j + 1];
-        k[j + 1] = temp;
-  }
-
-  // check for "small" straight with ace
-  if(k[0] == 2 && k[1] == 3 && k[2] == 4 && k[3] == 5 && k[4] == 14) return 1;
-
-  // check if the values are adjacent
-  if (k[1] == k[0] + 1
-      && k[2] == k[1] + 1
-      && k[3] == k[2] + 1
-      && k[4] == k[3] + 1)
-  {
-    return 1;
-  }
-  else return 0;
-}
-
 int main() {
   /*
 
@@ -115,5 +63,61 @@ int main() {
   
   return 0;
 }
+
+/*
+  Parametrina 5 pelikortin numeroarvoa k, 2..14 (ei välttämättä
+  numerojärjesteyksessä).
+
+  Palauttaa 1, jos numeroarvot voidaan järjestää siten, että
+  ne muodostavat suoran (esim. 4,5,6,7,8).
+
+  Huom! Ässää (arvo 14) voidaan käyttää suorissa myös arvona 1
+  (esim. 1,2,3,4,5).
+*/
+extern inline int is_straight(int *k) {
+  // TODO
+  // sort the cards from smallest to greatest. (bubble sort)
+  int i, j;
+
+  for (i = 0; i < 5 - 1; i++)
+    for (j = 0; j < 5 - i - 1; j++)
+      if (k[j] > k[j + 1]) {
+        int temp = k[j];
+        k[j] = k[j + 1];
+        k[j + 1] = temp;
+  }
+
+  // check for "small" straight with ace
+  if(k[0] == 2 && k[1] == 3 && k[2] == 4 && k[3] == 5 && k[4] == 14) return 1;
+
+  // check if the values are adjacent
+  if (k[1] == k[0] + 1
+      && k[2] == k[1] + 1
+      && k[3] == k[2] + 1
+      && k[4] == k[3] + 1)
+  {
+    return 1;
+  }
+  else return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
