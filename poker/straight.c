@@ -61,8 +61,6 @@ int main() {
               ++suoria;
   }}}}}
   t2 = clock();
-  for(int i = 0; i < 5; i++) printf("%d ", k[i]);
-  printf("\n");
   printf("Suoria     : %d kpl (oikea arvo 1228800)\n", suoria);
   printf("Aikaa kului: %.1fs\n", (t2 - t1) / (float)CLOCKS_PER_SEC);
 
@@ -80,7 +78,7 @@ void bubble_sort(int array[], int size) {
 
   for (i = 0; i < size - 1; i++)
     for (j = 0; j < size - i - 1; j++)
-      if (array[j] > array[j + 1])
+      if (array[j] < array[j + 1])
         swap(array[j], array[j + 1]);
 }
 
@@ -97,14 +95,26 @@ void bubble_sort(int array[], int size) {
 extern inline int is_straight(int *k) {
   // TODO
   // sort the cards from greatest to smallest. (bubble sort)
-  int counter = 0;
+  /*int counter = 0;*/
+  for (int i = 0; i < 5; i++) printf("%d ", k[i]);
+  printf("\n");
   bubble_sort(k, 5);
 
-  // check if the indexes are one greater than the next, no need to check the other way around.
-  for(int i=0; i < 5; i++)
-    if((k[i]-1) == k[i+1])
-      counter++;
+  // check for "small" straight with ace
+  if(k[0] == 2 && k[1] == 3 && k[2] == 4 && k[3] == 5 && k[4] == 14) return 1;
 
-  if (counter == 5) return 1;
-  return 0;
+  // check if the indexes are one greater than the next, no need to check the other way around.
+  /*for(int i=0; i < 5; i++) {*/
+    /*if(k[i]-1 == k[i+1]) counter++;*/
+  /*}*/
+  /*if (counter == 4) return 1;*/
+
+  if (k[1] == k[0] + 1
+      && k[2] == k[1] + 1
+      && k[3] == k[2] + 1
+      && k[4] == k[3] + 1)
+  {
+    return 1;
+  }
+  else return 0;
 }
