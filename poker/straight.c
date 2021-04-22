@@ -1,19 +1,3 @@
-/*
-
-  Harjoitus 3
-
-  Optimoi suorien tunnistus. Älä muuta kääntäjäoptioita.
-  Pidä ohjelma yksisäikeisenä.
-
-  Vertaa alkuperäistä ja optimoitua versiota:
-
-  - kuinka paljon enemmän muistia optimoitu versio kuluttaa?
-  - kuinka paljon nopeammin optimoitu versio toimii?
-
-  Käännös: gcc straight.c -o straight
-
-*/
-
 #include <stdio.h>
 #include <time.h>
 
@@ -33,21 +17,6 @@ extern inline int is_straight(int *k);
 extern inline int is_straight_bit(int *k);
 
 int main() {
-  /*
-
-    Käydään läpi kaikki viiden kortin permutaatiot, ja lasketaan
-    kuin monta suoraa (värisuoraa tai tavallista) löytyy.
-
-    Ks. Wikipedia http://en.wikipedia.org/wiki/Poker_probability :
-
-    Royal flush     4      combinations
-    Straight flush  36     combinations
-    Straight        10,200 combinations
-
-    Koska 5 korttia voi olla 5 x 4 x 3 x 2 x 1 = 120 järjestyksessä,
-    pitäisi suoria löytyä (10200 + 36 + 4) x 120 = 1228800 kappaletta.
-
-  */
   int k0, k1, k2, k3, k4; /*[> Pakan kortit, 0..51<]*/
   int k[5];               /*[> Korttien numeroarvot, 2..14<]*/
   int suoria;             /*[> Suorien lkm<]*/
@@ -77,19 +46,9 @@ int main() {
   return 0;
 }
 
-/*
-  Parametrina 5 pelikortin numeroarvoa k, 2..14 (ei välttämättä
-  numerojärjesteyksessä).
-
-  Palauttaa 1, jos numeroarvot voidaan järjestää siten, että
-  ne muodostavat suoran (esim. 4,5,6,7,8).
-
-  Huom! Ässää (arvo 14) voidaan käyttää suorissa myös arvona 1
-  (esim. 1,2,3,4,5).
-*/
 extern inline int is_straight(int *k) {
   // TODO
-  // PERFORMANCE: 15.7s.
+  // PERFORMANCE: ~16s.
   // sort the cards from smallest to greatest. (bubble sort)
   int i, j;
 
@@ -116,6 +75,8 @@ extern inline int is_straight(int *k) {
 }
 
 extern inline int is_straight_bit(int* k) {
+  // TODO
+  // PERFORMANCE: ~6s
   unsigned h = 0;
 
   h |= 0x1 << (k[0] - 2);
@@ -126,38 +87,18 @@ extern inline int is_straight_bit(int* k) {
 
   switch(h) {
     case STRAIGHT_0:
-      return 1;
-      break;
     case STRAIGHT_1:
-      return 1;
-      break;
     case STRAIGHT_2:
-      return 1;
-      break;
     case STRAIGHT_3:
-      return 1;
-      break;
     case STRAIGHT_4:
-      return 1;
-      break;
     case STRAIGHT_5:
-      return 1;
-      break;
     case STRAIGHT_6:
-      return 1;
-      break;
     case STRAIGHT_7:
-      return 1;
-      break;
     case STRAIGHT_8:
-      return 1;
-      break;
     case STRAIGHT_9:
       return 1;
-      break;
     default:
       return 0;
-      break;
   }
 }
 
