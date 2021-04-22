@@ -17,7 +17,20 @@
 #include <stdio.h>
 #include <time.h>
 
+#define STRAIGHT_1 0x1F
+#define STRAIGHT_2 0x3E
+#define STRAIGHT_3 0x7C
+#define STRAIGHT_4 0xF8
+#define STRAIGHT_5 0x1F0
+#define STRAIGHT_6 0x3E0
+#define STRAIGHT_7 0x7C0
+#define STRAIGHT_8 0xF80
+#define STRAIGHT_9 0x1F00
+#define STRAIGHT_0 0x100F
+
 extern inline int is_straight(int *k);
+
+extern inline int is_straight_bit(int *k);
 
 int main() {
   /*
@@ -53,7 +66,7 @@ int main() {
             k[2] = (k2 % 13) + 2;
             k[3] = (k3 % 13) + 2;
             k[4] = (k4 % 13) + 2;
-            if (is_straight(k))
+            if (is_straight_bit(k))
               ++suoria;
   }}}}}
   t2 = clock();
@@ -76,6 +89,7 @@ int main() {
 */
 extern inline int is_straight(int *k) {
   // TODO
+  // PERFORMANCE: 15.7s.
   // sort the cards from smallest to greatest. (bubble sort)
   int i, j;
 
@@ -101,7 +115,51 @@ extern inline int is_straight(int *k) {
   else return 0;
 }
 
+extern inline int is_straight_bit(int* k) {
+  unsigned h = 0;
 
+  h |= 0x1 << (k[0] - 2);
+  h |= 0x1 << (k[1] - 2);
+  h |= 0x1 << (k[2] - 2);
+  h |= 0x1 << (k[3] - 2);
+  h |= 0x1 << (k[4] - 2);
+
+  switch(h) {
+    case STRAIGHT_0:
+      return 1;
+      break;
+    case STRAIGHT_1:
+      return 1;
+      break;
+    case STRAIGHT_2:
+      return 1;
+      break;
+    case STRAIGHT_3:
+      return 1;
+      break;
+    case STRAIGHT_4:
+      return 1;
+      break;
+    case STRAIGHT_5:
+      return 1;
+      break;
+    case STRAIGHT_6:
+      return 1;
+      break;
+    case STRAIGHT_7:
+      return 1;
+      break;
+    case STRAIGHT_8:
+      return 1;
+      break;
+    case STRAIGHT_9:
+      return 1;
+      break;
+    default:
+      return 0;
+      break;
+  }
+}
 
 
 
