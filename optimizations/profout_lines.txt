@@ -1,0 +1,50 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls   s/call   s/call  name    
+ 98.24     17.74    17.74        1    17.74    17.78  stoogesort(int*, int, int)
+  2.40     18.18     0.43                             frame_dummy
+  0.17     18.21     0.03  3210494     0.00     0.00  std::enable_if<std::__and_<std::__not_<std::__is_tuple_like<int> >, std::is_move_constructible<int>, std::is_move_assignable<int> >::value, void>::type std::swap<int>(int&, int&)
+  0.06     18.22     0.01  9631482     0.00     0.00  std::remove_reference<int&>::type&& std::move<int&>(int&)
+  0.00     18.22     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z10stoogesortPiii
+  0.00     18.22     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+
+			Call graph
+
+
+granularity: each sample hit covers 2 byte(s) for 0.05% of 18.22 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]     97.6    0.00   17.78                 main [1]
+               17.74    0.04       1/1           stoogesort(int*, int, int) [2]
+-----------------------------------------------
+                             5230176600             stoogesort(int*, int, int) [2]
+               17.74    0.04       1/1           main [1]
+[2]     97.6   17.74    0.04       1+5230176600 stoogesort(int*, int, int) [2]
+                0.03    0.01 3210494/3210494     std::enable_if<std::__and_<std::__not_<std::__is_tuple_like<int> >, std::is_move_constructible<int>, std::is_move_assignable<int> >::value, void>::type std::swap<int>(int&, int&) [4]
+                             5230176600             stoogesort(int*, int, int) [2]
+-----------------------------------------------
+                                                 <spontaneous>
+[3]      2.4    0.43    0.00                 frame_dummy [3]
+-----------------------------------------------
+                0.03    0.01 3210494/3210494     stoogesort(int*, int, int) [2]
+[4]      0.2    0.03    0.01 3210494         std::enable_if<std::__and_<std::__not_<std::__is_tuple_like<int> >, std::is_move_constructible<int>, std::is_move_assignable<int> >::value, void>::type std::swap<int>(int&, int&) [4]
+                0.01    0.00 9631482/9631482     std::remove_reference<int&>::type&& std::move<int&>(int&) [5]
+-----------------------------------------------
+                0.01    0.00 9631482/9631482     std::enable_if<std::__and_<std::__not_<std::__is_tuple_like<int> >, std::is_move_constructible<int>, std::is_move_assignable<int> >::value, void>::type std::swap<int>(int&, int&) [4]
+[5]      0.1    0.01    0.00 9631482         std::remove_reference<int&>::type&& std::move<int&>(int&) [5]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [16]
+[11]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z10stoogesortPiii [11]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [12]
+-----------------------------------------------
+                0.00    0.00       1/1           _GLOBAL__sub_I__Z10stoogesortPiii [11]
+[12]     0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [12]
+-----------------------------------------------
+
+Index by function name
+
+  [11] _GLOBAL__sub_I__Z10stoogesortPiii (stooge.cpp) [12] __static_initialization_and_destruction_0(int, int) (stooge.cpp) [4] std::enable_if<std::__and_<std::__not_<std::__is_tuple_like<int> >, std::is_move_constructible<int>, std::is_move_assignable<int> >::value, void>::type std::swap<int>(int&, int&)
+   [2] stoogesort(int*, int, int) [5] std::remove_reference<int&>::type&& std::move<int&>(int&) [3] frame_dummy
