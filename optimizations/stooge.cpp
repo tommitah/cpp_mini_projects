@@ -102,14 +102,11 @@ inline void stoogesort_opt(int arr[], int l, int h)
 	}
 }
 
-
 // Driver Code
 int main()
 {
   /*--------- Tommis additions ---------*/
 	int arr[SIZE_a] = {};
-
-  clock_t start = clock();
 
   /* populate the array with 5000 random values between 1-100 */
   for(int i = 0; i < SIZE_a; i++) {
@@ -117,6 +114,8 @@ int main()
   }
 
 	int N = sizeof(arr) / sizeof(arr[0]);
+
+  clock_t start = clock();
 
 	// Function Call
 	stoogesort_opt(arr, 0, N - 1);
