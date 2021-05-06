@@ -28,6 +28,9 @@ std::string operator_call_format(void *p) {
   return str;
 }
 
+/*
+ * Tester class.
+ * */
 class tester {
 public:
   tester() { std::cout << "new tester" << std::endl; }
