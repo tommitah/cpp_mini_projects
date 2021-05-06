@@ -1,0 +1,4 @@
+Memory allocated. 0x557a0a11deb0
+Memory freed. 0x557a0a11deb0
+Memory allocated. 0x564bb3ab6eb0
+Memory freed. 0x564bb3ab6eb0
