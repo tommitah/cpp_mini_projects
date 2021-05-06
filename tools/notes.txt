@@ -1,1 +1,6 @@
 Teht1.
+  Dynaamisten jäsenien käytössä olisi tärkeää määritellä sijoitusoperaattori ja kopiokonstruktori.
+  Parametrit on väärinpäin, tyypit on ok, eli koodi kääntyy.
+  Varattua taulukkoa ei saisi tuhota pelkällä deletellä.
+
+Teht2.
