@@ -8,6 +8,7 @@
 
 /*
  * Logs the contents of a string to a named text file.
+ *
  * */
 auto log_to_file(const std::string &text) {
   std::ofstream log_file;
