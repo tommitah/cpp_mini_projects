@@ -29,7 +29,7 @@ public:
   /*
    * Overrides new operator
    * */
-  void *operator new(std::size_t n) noexcept(false) {
+  void *operator new(std::size_t n) {
     void *p = malloc(n);
     log_to_file("Memory allocated. " + operator_call_format(p));
     return p;
@@ -38,7 +38,7 @@ public:
   /*
    * Overrides delete operator
    * */
-  void operator delete(void *p) noexcept(true) {
+  void operator delete(void *p) {
     log_to_file("Memory freed. " + operator_call_format(p));
     free(p);
   }
