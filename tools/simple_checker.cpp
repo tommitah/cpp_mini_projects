@@ -6,6 +6,9 @@
 #include <stdlib.h>
 #include <string>
 
+/*
+ * Logs the contents of a string to a named text file.
+ * */
 auto log_to_file(const std::string &text) {
   std::ofstream log_file;
   log_file.open("memory_log.txt", std::ios::out | std::ios::app);
@@ -14,6 +17,10 @@ auto log_to_file(const std::string &text) {
   log_file.close();
 }
 
+/*
+ * Changes the returns a string that's a copy of
+ * the memory address.
+ * */
 std::string operator_call_format(void *p) {
   std::stringstream stream;
   std::string str;
